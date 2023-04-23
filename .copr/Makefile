@@ -9,3 +9,5 @@ download: rpmdev-spectool wget
 
 srpm:	download
 	rpmbuild -bs $(spec) --undefine=_disable_source_fetch --define "_topdir ." --define "_sourcedir ." --define "_srcrpmdir ."
+	rpm -qlp *.src.rpm
+	rpmbuild --showrc |grep -i copr
