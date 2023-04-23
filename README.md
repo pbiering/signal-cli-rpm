@@ -81,6 +81,10 @@ Transfer RPM to final destination system and install (this will also resolve and
 dnf localinstall signal-cil-<VERSION>-<RELEASE>.<DIST>.<ARCH>.rpm
 ``` 
 
-### Configuration
+#### via Fedora copr
+
+See here for details: https://copr.fedorainfracloud.org/coprs/pbiering/InternetServerExtensions/
+
+### configuration
 
 See https://github.com/AsamK/signal-cli/wiki
