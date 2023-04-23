@@ -1,0 +1,8 @@
+*.tar.gz
+*.rpm
+BUILD
+BUILDROOT
+RPMS
+BUILD/*
+BUILDROOT/*
+RPMS/*
