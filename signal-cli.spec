@@ -60,6 +60,10 @@ BuildRequires:  systemd
 Requires(pre):  shadow-utils
 Requires:       java-17-openjdk-headless
 
+# for downloading sources
+BuildRequires:	wget
+BuildRequires:	rpmdevtools
+
 
 
 %description
