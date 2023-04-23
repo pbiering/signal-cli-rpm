@@ -8,6 +8,13 @@ download: rpmdev-spectool wget
 	rpmdev-spectool $(spec) | awk '$$1 ~ /^Source/ && $$2 ~ /^http/ { print $$2 }' | while read url; do echo "Download source: $$url"; wget -nv -c $$url; done
 
 srpm:	download
-	rpmbuild -bs $(spec) --undefine=_disable_source_fetch --define "_topdir ." --define "_sourcedir ." --define "_srcrpmdir ."
-	rpm -qlp *.src.rpm
-	rpmbuild --showrc |grep -i copr
+	if [ -n "$(outdir)" ]; then \
+		rpmbuild -bs $(spec) --undefine=_disable_source_fetch --define "_topdir ." --define "_sourcedir ." --define "_srcrpmdir $(outdir)"; \
+		ls -vl $(outdir)/signal-cli-*.src.rpm; \
+		rpm -qlp $(outdir)/signal-cli-*.src.rpm; \
+	else \
+		rpmbuild -bs $(spec) --undefine=_disable_source_fetch --define "_topdir ." --define "_sourcedir ." --define "_srcrpmdir ."; \
+		ls -vl signal-cli-*.src.rpm; \
+		rpm -qlp signal-cli-*.src.rpm; \
+	fi
+	rpmbuild --showrc | grep -i copr ||:

@@ -16,4 +16,4 @@ distclean: clean
 
 srpm:
 	echo "BUILD: create SRPM like COPR is doing"
-	make -f ./.copr/Makefile srpm outdir="." spec="signal-cli.spec"
+	make -f ./.copr/Makefile srpm spec="signal-cli.spec"
