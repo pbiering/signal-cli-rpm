@@ -4,12 +4,11 @@ RPM packaged signal-cli
 ### Information
 
 ### supports
-- dbus configuration/service file
- - see also: https://github.com/AsamK/signal-cli/wiki/DBus-service
+- dbus configuration/service file, see also: https://github.com/AsamK/signal-cli/wiki/DBus-service
 - systemd unit file
 
 ### confilg files
-taken+adjusted from https://github.com/AsamK/signal-cli/tree/master/data
+- required ones taken+adjusted from https://github.com/AsamK/signal-cli/tree/master/data
 
 ## Usage
 
