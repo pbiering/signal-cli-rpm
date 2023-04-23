@@ -44,6 +44,9 @@ URL:		https://github.com/AsamK/signal-cli
 
 Source0:	https://github.com/AsamK/signal-cli/releases/download/v%{version}/signal-cli-%{version}-Linux.tar.gz
 
+
+## config files taken+adjusted from https://github.com/AsamK/signal-cli/tree/master/data
+
 # dbus
 Source100:	org.asamk.Signal.conf
 Source101:	org.asamk.Signal.service
@@ -52,7 +55,6 @@ Source101:	org.asamk.Signal.service
 Source200:	signal-cli.service
 
 
-# Scriptlets
 %{?systemd_requires}
 BuildRequires:  systemd
 Requires(pre):  shadow-utils
@@ -67,6 +69,8 @@ home directory  : %{vardir}
 binary for native interface: %{_bindir}/signal-cli
 binary for dbus   interface: %{_bindir}/signal-cli-dbus
 
+
+
 %prep
 %{__rm} -rf %{builddir}
 %{__mkdir} %{builddir}
@@ -76,13 +80,13 @@ cd %{builddir}
 
 
 ## SELinux
-%{__mkdir} SELinux
+# (currently no policy)
 
-#{__cp} #{SOURCE91} SELinux/#{pname}.te
 
 
 %build
 # nothing to build
+
 
 
 %install
@@ -142,12 +146,8 @@ done
 
 
 ## SELinux
-#for selinuxvariant in %{selinux_variants}; do
-#  install -d %{buildroot}%{_datadir}/selinux/${selinuxvariant}
-#  install -p -m 644 SELinux/%{pname}.pp.${selinuxvariant} \
-#    %{buildroot}%{_datadir}/selinux/${selinuxvariant}/%{pname}.pp
-#done
-#hardlink -cv %{buildroot}%{_datadir}/selinux
+# (currently no policy)
+
 
 # replace placeholders
 find %{buildroot}%{_unitdir} -type f | while read file; do
