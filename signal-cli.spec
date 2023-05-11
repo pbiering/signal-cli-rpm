@@ -18,7 +18,7 @@
 
 
 ## MAIN VERSIONS+RELEASE
-%global version_signal_cli 			0.11.9.1
+%global version_signal_cli 			0.11.10
 
 %global release_token 1
 
@@ -247,5 +247,8 @@ done
 
 
 %changelog
+* Thu May 11 2023 Peter Bieringer <pb@bieringer.de> - 0.11.10-1
+- New upstream version 0.11.10
+
 * Sun Apr 23 2023 Peter Bieringer <pb@bieringer.de> - 0.11.9.1-1
 - Initial version
