@@ -1,7 +1,10 @@
 # signal-cli-rpm
-RPM packaged signal-cli
+RPM packaged signal-cli for Fedora and Enterprise Linux 
 
-### Information
+Until included by Fedora and EPEL available via copr:
+ - https://copr.fedorainfracloud.org/coprs/pbiering/InternetServerExtensions/
+
+## Information
 
 ### supports
 - dbus configuration/service file, see also: https://github.com/AsamK/signal-cli/wiki/DBus-service
@@ -83,7 +86,9 @@ dnf localinstall signal-cil-<VERSION>-<RELEASE>.<DIST>.<ARCH>.rpm
 
 #### via Fedora copr
 
-See here for details: https://copr.fedorainfracloud.org/coprs/pbiering/InternetServerExtensions/
+Until included by Fedora and EPEL available via copr:
+
+- https://copr.fedorainfracloud.org/coprs/pbiering/InternetServerExtensions/
 
 ### configuration
 

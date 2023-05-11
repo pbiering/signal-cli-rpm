@@ -20,7 +20,7 @@
 ## MAIN VERSIONS+RELEASE
 %global version_signal_cli 			0.11.10
 
-%global release_token 1
+%global release_token 2
 
 ## VIRTUALENV+BUNDLED-AS-REQUIRED by EL+EPEL destination directories
 %global basedir         /usr/lib/%{pname}
@@ -224,6 +224,8 @@ done
 # SELinux
 # (currently no policy)
 
+systemctl daemon-reload
+systemctl condrestart %{pname}.service
 
 
 %files
@@ -247,6 +249,9 @@ done
 
 
 %changelog
+* Thu May 11 2023 Peter Bieringer <pb@bieringer.de> - 0.11.10-2
+- Conditional restart after update
+
 * Thu May 11 2023 Peter Bieringer <pb@bieringer.de> - 0.11.10-1
 - New upstream version 0.11.10
 
