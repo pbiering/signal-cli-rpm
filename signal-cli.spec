@@ -20,7 +20,7 @@
 ## MAIN VERSIONS+RELEASE
 %global version_signal_cli 			0.11.10
 
-%global release_token 2
+%global release_token 3
 
 ## VIRTUALENV+BUNDLED-AS-REQUIRED by EL+EPEL destination directories
 %global basedir         /usr/lib/%{pname}
@@ -117,14 +117,14 @@ if [ "\$(whoami)" != "%{scuser}" ]; then
     echo "This command must be run under the signal-cli user (%{scuser})."
     exit 1
 fi
-%{bindir}/signal-cli \$@
+%{bindir}/signal-cli "\$@"
 EOF
 
 
 ## create wrapper "dbus"
 cat > %{buildroot}%{_bindir}/signal-cli-dbus << EOF
 #!/bin/sh
-%{bindir}/signal-cli --dbus-system \$@
+%{bindir}/signal-cli --dbus-system "\$@"
 EOF
 
 
@@ -249,6 +249,10 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Sat May 13 2023 Peter Bieringer <pb@bieringer.de> - 0.11.10-3
+- systemd unit file: specify PrivateTmp to avoid files with insecure permissions in /tmp
+- wrapper scripts: quote arguments
+
 * Thu May 11 2023 Peter Bieringer <pb@bieringer.de> - 0.11.10-2
 - Conditional restart after update
 
