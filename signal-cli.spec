@@ -18,7 +18,7 @@
 
 
 ## MAIN VERSIONS+RELEASE
-%global version_signal_cli 			0.11.10
+%global version_signal_cli	0.11.11
 
 %global release_token 3
 
@@ -249,6 +249,9 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Sun May 28 2023 Peter Bieringer <pb@bieringer.de> - 0.11.11-3
+- New upstream version 0.11.11
+
 * Sat May 13 2023 Peter Bieringer <pb@bieringer.de> - 0.11.10-3
 - systemd unit file: specify PrivateTmp to avoid files with insecure permissions in /tmp
 - wrapper scripts: quote arguments
