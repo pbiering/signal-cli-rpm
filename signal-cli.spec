@@ -18,7 +18,7 @@
 
 
 ## MAIN VERSIONS+RELEASE
-%global version_signal_cli	0.11.11
+%global version_signal_cli	0.12.0
 
 %global release_token 3
 
@@ -249,6 +249,9 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Sat Aug 19 2023 Peter Bieringer <pb@bieringer.de> - 0.12.0-3
+- New upstream version 0.12.0
+
 * Sun May 28 2023 Peter Bieringer <pb@bieringer.de> - 0.11.11-3
 - New upstream version 0.11.11
 
