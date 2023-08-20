@@ -20,7 +20,10 @@
 ## MAIN VERSIONS+RELEASE
 %global version_signal_cli	0.12.0
 
-%global release_token 3
+# EL8: since 0.12.0 bundled libsignal_jni.so requires GLIBC_2.33 while has only 2.28 -> build from https://github.com/exquo/signal-libs-build/ is required
+%global version_libsignal	0.30.0
+
+%global release_token 4
 
 ## VIRTUALENV+BUNDLED-AS-REQUIRED by EL+EPEL destination directories
 %global basedir         /usr/lib/%{pname}
@@ -45,6 +48,9 @@ URL:		https://github.com/AsamK/signal-cli
 
 Source0:	https://github.com/AsamK/signal-cli/releases/download/v%{version}/signal-cli-%{version}-Linux.tar.gz
 
+# only used on EL8 since 0.12.0
+Source1:	https://github.com/exquo/signal-libs-build/releases/download/libsignal_v%{version_libsignal}/libsignal_jni.so-v%{version_libsignal}-x86_64-unknown-linux-gnu.tar.gz
+
 
 ## config files taken+adjusted from https://github.com/AsamK/signal-cli/tree/master/data
 
@@ -65,6 +71,8 @@ Requires:       java-17-openjdk-headless
 BuildRequires:	wget
 BuildRequires:	rpmdevtools
 
+# for testing the build
+BuildRequires:	java-17-openjdk-headless
 
 
 %description
@@ -106,6 +114,16 @@ install -d -p %{buildroot}%{basedir}
 # remove non Linux files
 %{__rm} %{buildroot}%{basedir}/bin/%{pname}.bat
 
+# replace libsignal_jni.so
+%if 0%{?rhel} == 8
+%{__tar} xf %{SOURCE1} -C %{buildroot}%{basedir}
+# check compatibility
+ldd %{buildroot}%{basedir}/libsignal_jni.so
+# implant libsignal
+zip -j %{buildroot}%{basedir}/lib/libsignal-client-%{version_libsignal}.jar %{buildroot}%{basedir}/libsignal_jni.so
+# remove
+%{__rm} %{buildroot}%{basedir}/libsignal_jni.so
+%endif
 
 ### wrapper scripts
 install -d -p %{buildroot}%{_bindir}
@@ -159,6 +177,10 @@ find %{buildroot}%{_unitdir} -type f | while read file; do
         # replace directories
         sed -i -e 's,@BINDIR@,%{bindir},g;s,@BASEDIR@,%{basedir},g;s,@VARDIR@,%{vardir},g;s,@SCUSER@,%{scuser},g;s,@SCGROUP@,%{scgroup},g' $file
 done
+
+
+%check
+%{buildroot}%{basedir}/bin/signal-cli --version
 
 
 %pre
@@ -249,6 +271,10 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Sun Aug 20 2023 Peter Bieringer <pb@bieringer.de> - 0.12.0-4
+- EL8: implant libsignal_jni.so from https://github.com/exquo/signal-libs-build/ to fix minimum required GLIBC_2.33 by upstream
+- Add check section
+
 * Sat Aug 19 2023 Peter Bieringer <pb@bieringer.de> - 0.12.0-3
 - New upstream version 0.12.0
 
