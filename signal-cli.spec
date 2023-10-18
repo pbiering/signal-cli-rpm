@@ -46,7 +46,7 @@ Release:	%{release_token}%{?dist}
 License:	GPLv3
 URL:		https://github.com/AsamK/signal-cli
 
-Source0:	https://github.com/AsamK/signal-cli/releases/download/v%{version}/signal-cli-%{version}-Linux-native.tar.gz
+Source0:	https://github.com/AsamK/signal-cli/releases/download/v%{version}/signal-cli-%{version}.tar.gz
 
 # only used on EL8 since 0.12.0
 Source1:	https://github.com/exquo/signal-libs-build/releases/download/libsignal_v%{version_libsignal}/libsignal_jni.so-v%{version_libsignal}-x86_64-unknown-linux-gnu.tar.gz
@@ -112,7 +112,7 @@ install -d -p %{buildroot}%{basedir}
 %{__tar} xf %{SOURCE0} -C %{buildroot}%{basedir} --strip-components=1
 
 # remove non Linux files
-%{__rm} %{buildroot}%{basedir}/bin/%{pname}.bat
+%{__rm} -f %{buildroot}%{basedir}/bin/%{pname}.bat
 
 # replace libsignal_jni.so
 %if 0%{?rhel} == 8
