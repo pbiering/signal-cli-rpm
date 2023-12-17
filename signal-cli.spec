@@ -119,7 +119,17 @@ install -d -p %{buildroot}%{basedir}
 %{__tar} xf %{SOURCE1} -C %{buildroot}%{basedir}
 # check compatibility
 ldd %{buildroot}%{basedir}/libsignal_jni.so
+# check for file is existing
+if [ ! -f %{buildroot}%{basedir}/lib/libsignal-client-%{version_libsignal}.jar ]; then
+	echo "ERROR : on implant libsignal_jni.so because of version mismatch"
+	%define version_jar $(ls -1 %{buildroot}%{basedir}/lib/libsignal-client-*.jar | %{__sed} 's/.*-\\([0-9.]*\\).jar/\\1/g')
+	echo "ERROR : SOURCE0 contains: %{version_jar} (signal-cli-%{version}.tar.gz)"
+	echo "ERROR : SOURCE1 contains: %{version_libsignal} (libsignal_jni.so-v%{version_libsignal}-x86_64-unknown-linux-gnu.tar.gz)"
+	echo "ERROR : fix version in SPEC file: version_libsignal"
+	exit 1
+fi
 # implant libsignal
+echo "INFO  : implant libsignal_jni.so (libsignal_jni.so-v%{version_libsignal}-x86_64-unknown-linux-gnu.tar.gz) into libsignal-client-%{version_libsignal}.jar"
 zip -j %{buildroot}%{basedir}/lib/libsignal-client-%{version_libsignal}.jar %{buildroot}%{basedir}/libsignal_jni.so
 # remove
 %{__rm} %{buildroot}%{basedir}/libsignal_jni.so
