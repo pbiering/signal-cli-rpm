@@ -193,14 +193,14 @@ else
 fi
 
 if getent passwd %{scuser} >/dev/null; then
-	echo "system user for %{pname} already exists: %{scuser}"
+	echo "system user  for %{pname} already exists: %{scuser}"
 	homedir=$(getent passwd %{scuser} | awk -F: '{ print $6 }')
 	if [ "$homedir" != "%{vardir}" ]; then
-		echo "system user for %{pname} already exists: %{scuser} bu has not required home directory: %{vardir} (current: $homedir)"
+		echo "system user  for %{pname} already exists: %{scuser} bu has not required home directory: %{vardir} (current: $homedir)"
 		exit 1
 	fi
 else
-	echo "system user for %{pname} needs to be created: %{scuser}"
+	echo "system user  for %{pname} needs to be created: %{scuser}"
     	useradd -r -g %{scgroup} -d %{vardir} -s /bin/bash -c "signal-cli commandline, dbus and JSON-RPC interface for the Signal messenger" %{scuser} >/dev/null
 fi
 
