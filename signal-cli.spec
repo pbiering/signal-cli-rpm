@@ -21,9 +21,9 @@
 %global version_signal_cli	0.12.7
 
 # EL8: since 0.12.0 bundled libsignal_jni.so requires GLIBC_2.33 while has only 2.28 -> build from https://github.com/exquo/signal-libs-build/ is required
-%global version_libsignal	0.32.1
+%global version_libsignal	0.36.1
 
-%global release_token 4
+%global release_token 5
 
 ## VIRTUALENV+BUNDLED-AS-REQUIRED by EL+EPEL destination directories
 %global basedir         /usr/lib/%{pname}
@@ -281,6 +281,9 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Sun Dec 17 2023 Peter Bieringer <pb@bieringer.de> - 0.12.7-5
+- EL8: update libsignal_jni.so to 0.36.1
+
 * Sat Dec 16 2023 Peter Bieringer <pb@bieringer.de> - 0.12.7-4
 - New upstream version 0.12.7
 
