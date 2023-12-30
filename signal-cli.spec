@@ -74,6 +74,9 @@ BuildRequires:	rpmdevtools
 # for testing the build
 BuildRequires:	java-17-openjdk-headless
 
+# for dbus
+Requires:	dbus-common dbus-tools
+
 
 %description
 signal-cli provides an unofficial commandline, dbus and JSON-RPC interface for the Signal messenger.
@@ -281,6 +284,9 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Sat Dec 30 2023 Peter Bieringer <pb@bieringer.de>
+- Add requirements: dbus-common dbus-tools
+
 * Sun Dec 17 2023 Peter Bieringer <pb@bieringer.de> - 0.12.7-5
 - EL8: update libsignal_jni.so to 0.36.1
 
