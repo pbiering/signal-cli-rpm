@@ -18,12 +18,12 @@
 
 
 ## MAIN VERSIONS+RELEASE
-%global version_signal_cli	0.12.7
+%global version_signal_cli	0.12.8
 
 # EL8: since 0.12.0 bundled libsignal_jni.so requires GLIBC_2.33 while has only 2.28 -> build from https://github.com/exquo/signal-libs-build/ is required
 %global version_libsignal	0.36.1
 
-%global release_token 5
+%global release_token 1
 
 ## VIRTUALENV+BUNDLED-AS-REQUIRED by EL+EPEL destination directories
 %global basedir         /usr/lib/%{pname}
@@ -284,6 +284,9 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Tue Feb 06 2024 Frank Wall <github@moov.de> - 0.12.8-1
+- New upstream version 0.12.8
+
 * Sat Dec 30 2023 Peter Bieringer <pb@bieringer.de>
 - Add requirements: dbus-common dbus-tools
 
