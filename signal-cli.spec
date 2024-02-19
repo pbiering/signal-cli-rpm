@@ -195,6 +195,7 @@ done
 
 
 %check
+export JAVA_HOME=/etc/alternatives/jre_21
 %{buildroot}%{basedir}/bin/signal-cli --version
 
 
