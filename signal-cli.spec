@@ -18,7 +18,7 @@
 
 
 ## MAIN VERSIONS+RELEASE
-%global version_signal_cli	0.12.8
+%global version_signal_cli	0.13.0
 
 # EL8: since 0.12.0 bundled libsignal_jni.so requires GLIBC_2.33 while has only 2.28 -> build from https://github.com/exquo/signal-libs-build/ is required
 %global version_libsignal	0.36.1
@@ -65,14 +65,14 @@ Source200:	signal-cli.service
 %{?systemd_requires}
 BuildRequires:  systemd
 Requires(pre):  shadow-utils
-Requires:       java-17-openjdk-headless
+Requires:       java-21-openjdk-headless
 
 # for downloading sources
 BuildRequires:	wget
 BuildRequires:	rpmdevtools
 
 # for testing the build
-BuildRequires:	java-17-openjdk-headless
+BuildRequires:	java-21-openjdk-headless
 
 # for dbus
 Requires:	dbus-common dbus-tools
@@ -148,6 +148,7 @@ if [ "\$(whoami)" != "%{scuser}" ]; then
     echo "This command must be run under the signal-cli user (%{scuser})."
     exit 1
 fi
+export JAVA_HOME=/etc/alternatives/jre_21
 %{bindir}/signal-cli "\$@"
 EOF
 
@@ -155,6 +156,7 @@ EOF
 ## create wrapper "dbus"
 cat > %{buildroot}%{_bindir}/signal-cli-dbus << EOF
 #!/bin/sh
+export JAVA_HOME=/etc/alternatives/jre_21
 %{bindir}/signal-cli --dbus-system "\$@"
 EOF
 
@@ -284,6 +286,11 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Mon Feb 19 2024 Peter Bieringer <pb@bieringer.de> - 0.13.0-1
+- New upstream version 0.13.0
+- Update requirement to Java 21
+- Enforce use of Java 21 in wrapper scripts
+
 * Tue Feb 06 2024 Frank Wall <github@moov.de> - 0.12.8-1
 - New upstream version 0.12.8
 
