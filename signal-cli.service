@@ -9,6 +9,7 @@ After=network-online.target
 Type=dbus
 PrivateTmp=yes
 Environment="SIGNAL_CLI_OPTS=-Xms2m"
+Environment="JAVA_HOME=/etc/alternatives/jre_21"
 ExecStart=@BINDIR@/signal-cli --config @VARDIR@ daemon --system
 User=@SCUSER@
 Group=@SCGROUP@
