@@ -23,9 +23,12 @@
 # EL8: since 0.12.0 bundled libsignal_jni.so requires GLIBC_2.33 while has only 2.28 -> build from https://github.com/exquo/signal-libs-build/ is required
 %global version_libsignal	0.39.2
 
-%global release_token 1
+# required major JAVA version
+%global version_java_major	21
 
-## VIRTUALENV+BUNDLED-AS-REQUIRED by EL+EPEL destination directories
+%global release_token 2
+
+
 %global basedir         /usr/lib/%{pname}
 %global bindir		%{basedir}/bin
 %global vardir		%{_localstatedir}/lib/%{pname}
@@ -61,18 +64,22 @@ Source101:	org.asamk.Signal.service
 # systemd
 Source200:	signal-cli.service
 
+# wrapper
+Source300:	signal-cli
+Source301:	signal-cli-dbus
+
 
 %{?systemd_requires}
 BuildRequires:  systemd
 Requires(pre):  shadow-utils
-Requires:       java-21-openjdk-headless
+Requires:       java-%{version_java_major}-openjdk-headless
 
 # for downloading sources
 BuildRequires:	wget
 BuildRequires:	rpmdevtools
 
 # for testing the build
-BuildRequires:	java-21-openjdk-headless
+BuildRequires:	java-%{version_java_major}-openjdk-headless
 
 # for dbus
 Requires:	dbus-common dbus-tools
@@ -170,14 +177,14 @@ done
 
 
 # replace placeholders
-find %{buildroot}%{_unitdir} -type f | while read file; do
+find %{buildroot}%{_unitdir} %{buildroot}%{_bindir} -type f | while read file; do
         # replace directories
-        sed -i -e 's,@BINDIR@,%{bindir},g;s,@BASEDIR@,%{basedir},g;s,@VARDIR@,%{vardir},g;s,@SCUSER@,%{scuser},g;s,@SCGROUP@,%{scgroup},g' $file
+        sed -i -e 's,@BINDIR@,%{bindir},g;s,@BASEDIR@,%{basedir},g;s,@VARDIR@,%{vardir},g;s,@SCUSER@,%{scuser},g;s,@SCGROUP@,%{scgroup},g;s,@JAVAMAJOR@,%{version_java_major},g' $file
 done
 
 
 %check
-export JAVA_HOME=/etc/alternatives/jre_21
+export JAVA_HOME=/etc/alternatives/jre_%{version_java_major}
 %{buildroot}%{basedir}/bin/signal-cli --version
 
 
@@ -269,6 +276,11 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Tue Feb 20 2024 Peter Bieringer <pb@bieringer.de> - 0.13.0-2
+- Carve out from spec file: signal-cli signal-cli-dbus wrapper scripts
+- Replace hardcoded JAVA major version by variable
+- Add JAVA_HOME to systemd unit file
+
 * Mon Feb 19 2024 Peter Bieringer <pb@bieringer.de> - 0.13.0-1
 - New upstream version 0.13.0
 - Update requirement to Java 21
