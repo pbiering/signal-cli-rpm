@@ -140,26 +140,8 @@ zip -j %{buildroot}%{basedir}/lib/libsignal-client-%{version_libsignal}.jar %{bu
 
 ### wrapper scripts
 install -d -p %{buildroot}%{_bindir}
-
-## create wrapper "native"
-cat > %{buildroot}%{_bindir}/signal-cli << EOF
-#!/bin/sh
-if [ "\$(whoami)" != "%{scuser}" ]; then
-    echo "This command must be run under the signal-cli user (%{scuser})."
-    exit 1
-fi
-export JAVA_HOME=/etc/alternatives/jre_21
-%{bindir}/signal-cli "\$@"
-EOF
-
-
-## create wrapper "dbus"
-cat > %{buildroot}%{_bindir}/signal-cli-dbus << EOF
-#!/bin/sh
-export JAVA_HOME=/etc/alternatives/jre_21
-%{bindir}/signal-cli --dbus-system "\$@"
-EOF
-
+install -D -m 0755 %{SOURCE300} %{buildroot}%{_bindir}
+install -D -m 0755 %{SOURCE301} %{buildroot}%{_bindir}
 
 ## dbus files
 install -d -p %{buildroot}%{_prefix}/share/dbus-1/system.d/

@@ -1,0 +1,3 @@
+#!/bin/sh
+export JAVA_HOME=/etc/alternatives/jre_@JAVAMAJOR@
+@BINDIR@/signal-cli --dbus-system "$@"

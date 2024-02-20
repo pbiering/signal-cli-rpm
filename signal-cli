@@ -1,0 +1,7 @@
+#!/bin/sh
+if [ "$(whoami)" != "@SCUSER@" ]; then
+    echo "This command must be run under the signal-cli user (@SCUSER@)."
+    exit 1
+fi
+export JAVA_HOME=/etc/alternatives/jre_@JAVAMAJOR@
+@BINDIR@/signal-cli "$@"
