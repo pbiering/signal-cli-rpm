@@ -265,6 +265,9 @@ systemctl condrestart %{pname}.service
 %{_prefix}/share/dbus-1/system-services/org.asamk.Signal.service
 
 %dir %attr(770,%{scuser},%{scgroup}) %{vardir}
+%dir %attr(770,%{scuser},%{scgroup}) %{vardir}/.local
+%dir %attr(770,%{scuser},%{scgroup}) %{vardir}/.local/share
+%dir %attr(770,%{scuser},%{scgroup}) %{vardir}/.local/share/%{pname}
 %dir %attr(770,%{scuser},%{scgroup}) %{vardir}/.local/share/%{pname}/*
 
 %{vardir}/*
@@ -276,6 +279,9 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Wed May 15 2024 Peter Bieringer <pb@bieringer.de>
+- Apply user/group for all folders in .local
+
 * Sat Apr 20 2024 Peter Bieringer <pb@bieringer.de> - 0.13.3-1
 - New upstream version 0.13.3
 - EL8: update libsignal_jni.so to 0.44.0
