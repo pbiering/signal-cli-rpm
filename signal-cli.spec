@@ -26,7 +26,7 @@
 # required major JAVA version
 %global version_java_major	21
 
-%global release_token 1
+%global release_token 2
 
 
 %global basedir         /usr/lib/%{pname}
@@ -279,7 +279,7 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
-* Wed May 15 2024 Peter Bieringer <pb@bieringer.de>
+* Wed May 15 2024 Peter Bieringer <pb@bieringer.de> - 0.13.3-2
 - Apply user/group for all folders in .local
 
 * Sat Apr 20 2024 Peter Bieringer <pb@bieringer.de> - 0.13.3-1
