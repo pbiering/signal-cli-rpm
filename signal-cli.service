@@ -16,6 +16,7 @@ Group=@SCGROUP@
 BusName=org.asamk.Signal
 # JVM always exits with 143 in reaction to SIGTERM signal
 SuccessExitStatus=143
+TimeoutSec=180
 
 [Install]
 Alias=dbus-org.asamk.Signal.service
