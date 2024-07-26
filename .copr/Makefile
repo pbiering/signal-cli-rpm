@@ -6,9 +6,21 @@ curl:
 
 download: rpmdev-spectool curl
 	rpmdev-spectool $(spec) | awk '$$1 ~ /^Source/ && $$2 ~ /^http/ { print $$2 }' | while read url; do \
-		echo "Download source: $$url -> $$file"; \
 		file=$$(basename $$url); \
-		curl -s -o $$file $$url; \
+		echo "INFO  : download source: $$url -> $$file"; \
+		curl -L -s -o $$file $$url; \
+		r=$$?; \
+		if [ $$r -eq 0 ]; then \
+			if [ -s $$file ]; then \
+				echo "INFO  : download source: $$url (SUCCESS)"; \
+			else \
+				echo "ERROR : file empty $$file"; \
+				exit 1; \
+			fi; \
+		else \
+			echo "ERROR : download source: $$url (ERROR)"; \
+			exit 1; \
+		fi; \
 		done
 
 srpm:	download
