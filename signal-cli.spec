@@ -18,10 +18,10 @@
 
 
 ## MAIN VERSIONS+RELEASE
-%global version_signal_cli	0.13.4
+%global version_signal_cli	0.13.5
 
 # EL8: since 0.12.0 bundled libsignal_jni.so requires GLIBC_2.33 while has only 2.28 -> build from https://github.com/exquo/signal-libs-build/ is required
-%global version_libsignal	0.47.0
+%global version_libsignal	0.52.2
 
 # required major JAVA version
 %global version_java_major	21
@@ -279,6 +279,11 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Fri Jul 26 2024 Peter Bieringer <pb@bieringer.de> - 0.13.5-1
+- New upstream version 0.13.5
+- EL8: update libsignal_jni.so to 0.52.2
+- signal-cli.service: increase startup timeout to 180 sec
+
 * Thu Jun 06 2024 Peter Bieringer <pb@bieringer.de> - 0.13.4-1
 - New upstream version 0.13.4
 - EL8: update libsignal_jni.so to 0.47.0
