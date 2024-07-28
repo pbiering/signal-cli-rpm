@@ -128,7 +128,10 @@ install -d -p %{buildroot}%{basedir}
 %if 0%{?rhel} == 8
 %{__tar} xf %{SOURCE1} -C %{buildroot}%{basedir}
 # check compatibility
-ldd %{buildroot}%{basedir}/libsignal_jni.so
+if ldd %{buildroot}%{basedir}/libsignal_jni.so | grep "not found"; then
+	echo "ERROR : libsignal_jni.so is not compatible"
+	exit 1
+fi
 # check for file is existing
 if [ ! -f %{buildroot}%{basedir}/lib/libsignal-client-%{version_libsignal}.jar ]; then
 	echo "ERROR : on implant libsignal_jni.so because of version mismatch"
@@ -279,6 +282,9 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Sun Jul 28 2024 Peter Bieringer <pb@bieringer.de>
+- EL8: improve check of libsignal_jni.so before implanting
+
 * Fri Jul 26 2024 Peter Bieringer <pb@bieringer.de> - 0.13.5-1
 - New upstream version 0.13.5
 - EL8: update libsignal_jni.so to 0.52.2
