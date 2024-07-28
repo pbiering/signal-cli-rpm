@@ -75,7 +75,7 @@ Requires(pre):  shadow-utils
 Requires:       java-%{version_java_major}-openjdk-headless
 
 # for downloading sources
-BuildRequires:	wget
+BuildRequires:	curl
 BuildRequires:	rpmdevtools
 
 # for testing the build
