@@ -26,7 +26,7 @@
 # required major JAVA version
 %global version_java_major	21
 
-%global release_token 1
+%global release_token 2
 
 
 %global basedir         /usr/lib/%{pname}
@@ -52,7 +52,9 @@ URL:		https://github.com/AsamK/signal-cli
 Source0:	https://github.com/AsamK/signal-cli/releases/download/v%{version}/signal-cli-%{version}.tar.gz
 
 # only used on EL8 since 0.12.0
-Source1:	https://github.com/exquo/signal-libs-build/releases/download/libsignal_v%{version_libsignal}/libsignal_jni.so-v%{version_libsignal}-x86_64-unknown-linux-gnu.tar.gz
+#Source1:	https://github.com/exquo/signal-libs-build/releases/download/libsignal_v%{version_libsignal}/libsignal_jni.so-v%{version_libsignal}-x86_64-unknown-linux-gnu.tar.gz
+# only used on EL8 since 0.52.1
+Source1:	https://media.projektzentrisch.de/temp/signal-cli/tests/libsignal_jni_so%(echo "%{version_libsignal}" | awk -F. '{ printf "%01d%02d%01d", $1, $2, $3 }')_ubuntu1804_amd64.gz
 
 
 ## config files taken+adjusted from https://github.com/AsamK/signal-cli/tree/master/data
@@ -126,7 +128,8 @@ install -d -p %{buildroot}%{basedir}
 
 # replace libsignal_jni.so
 %if 0%{?rhel} == 8
-%{__tar} xf %{SOURCE1} -C %{buildroot}%{basedir}
+#%{__tar} xf %{SOURCE1} -C %{buildroot}%{basedir}
+gunzip -c %{SOURCE1} >%{buildroot}%{basedir}/libsignal_jni.so
 # check compatibility
 if ldd %{buildroot}%{basedir}/libsignal_jni.so | grep "not found"; then
 	echo "ERROR : libsignal_jni.so is not compatible"
@@ -282,6 +285,9 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Mon Jul 29 2024 Peter Bieringer <pb@bieringer.de> - 0.13.5-2
+- EL8: change source of bundled libsignal_jni.so
+
 * Sun Jul 28 2024 Peter Bieringer <pb@bieringer.de>
 - EL8: improve check of libsignal_jni.so before implanting
 
