@@ -1,5 +1,9 @@
 #!/bin/sh
-if [ "$(whoami)" != "@SCUSER@" ]; then
+if [ "$(whoami)" = "root" ]; then
+    echo "This command will run under the signal-cli user (@SCUSER@)."
+    su -l @SCUSER@ -c "$0 $*"
+    exit $?
+elif [ "$(whoami)" != "@SCUSER@" ]; then
     echo "This command must be run under the signal-cli user (@SCUSER@)."
     exit 1
 fi

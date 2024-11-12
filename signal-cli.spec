@@ -26,7 +26,7 @@
 # required major JAVA version
 %global version_java_major	21
 
-%global release_token 1
+%global release_token 2
 
 
 %global basedir         /usr/lib/%{pname}
@@ -285,6 +285,9 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Tue Nov 12 2024 Peter Bieringer <pb@bieringer.de> - 0.13.9-2
+- Shell wrapper switches to signal client user if executed by root
+
 * Tue Oct 29 2024 Peter Bieringer <pb@bieringer.de> - 0.13.9-1
 - New upstream version 0.13.9
 
