@@ -285,7 +285,7 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
-* Sat Jan 18 26 2024 Peter Bieringer <pb@bieringer.de> - 0.13.12-1
+* Sat Jan 18 2025 Peter Bieringer <pb@bieringer.de> - 0.13.12-1
 - New upstream version 0.13.12
 - EL8: update libsignal_jni.so to 0.65.2
 
