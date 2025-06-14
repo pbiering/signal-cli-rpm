@@ -26,7 +26,7 @@
 # required major JAVA version
 %global version_java_major	21
 
-%global release_token 1
+%global release_token 2
 
 
 %global basedir         /usr/lib/%{pname}
@@ -168,6 +168,9 @@ install -D -m 0644 %{SOURCE101} %{buildroot}%{_prefix}/share/dbus-1/system-servi
 install -d -p %{buildroot}%{_unitdir}/
 install -D -m 0644 %{SOURCE200} %{buildroot}%{_unitdir}
 
+# man files
+install -d -p %{buildroot}%{_mandir}/
+%{__mv} %{buildroot}/%{basedir}/man/* %{buildroot}%{_mandir}/
 
 # home directory setup
 install -d -p -m 700 %{buildroot}/var/lib/%{pname}
@@ -278,6 +281,8 @@ systemctl condrestart %{pname}.service
 
 %{vardir}/*
 
+%{_mandir}/*
+
 %{basedir}
 
 ## SELinux
@@ -285,6 +290,9 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Sat Jun 14 2025 Peter Bieringer <pb@bieringer.de> - 0.13.16-2
+- Move man pages to designated directory
+
 * Thu Jun 12 2025 Peter Bieringer <pb@bieringer.de> - 0.13.16-1
 - New upstream version 0.13.16
 - EL8: update libsignal_jni.so to 0.73.2
