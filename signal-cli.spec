@@ -171,6 +171,7 @@ install -D -m 0644 %{SOURCE200} %{buildroot}%{_unitdir}
 # man files
 install -d -p %{buildroot}%{_mandir}/
 %{__mv} %{buildroot}/%{basedir}/man/* %{buildroot}%{_mandir}/
+%{__rm} -d %{buildroot}/%{basedir}/man
 
 # home directory setup
 install -d -p -m 700 %{buildroot}/var/lib/%{pname}
@@ -290,6 +291,9 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Sun Jun 15 2025 Peter Bieringer <pb@bieringer.de>
+- Do not package empty original man directory
+
 * Sat Jun 14 2025 Peter Bieringer <pb@bieringer.de> - 0.13.16-2
 - Move man pages to designated directory
 
