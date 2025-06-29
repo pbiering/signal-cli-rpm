@@ -26,7 +26,7 @@
 # required major JAVA version
 %global version_java_major	21
 
-%global release_token 2
+%global release_token 1
 
 
 %global basedir         /usr/lib/%{pname}
