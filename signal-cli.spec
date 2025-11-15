@@ -18,10 +18,10 @@
 
 
 ## MAIN VERSIONS+RELEASE
-%global version_signal_cli	0.13.21
+%global version_signal_cli	0.13.22
 
 # EL8: since 0.12.0 bundled libsignal_jni.so requires GLIBC_2.33 while has only 2.28 -> build from https://github.com/exquo/signal-libs-build/ is required
-%global version_libsignal	0.84.0
+%global version_libsignal	0.86.1
 
 # required major JAVA version
 %global version_java_major	21
@@ -291,6 +291,10 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Sat Nov 15 2025 Peter Bieringer <pb@bieringer.de> - 0.13.22-1
+- New upstream version 0.13.22
+- EL8: update libsignal_jni.so to 0.86.1
+
 * Sun Nov 02 2025 Peter Bieringer <pb@bieringer.de> - 0.13.21-1
 - New upstream version 0.13.21
 - EL8: update libsignal_jni.so to 0.84.0
