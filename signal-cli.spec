@@ -86,6 +86,9 @@ BuildRequires:	java-%{version_java_major}-openjdk-headless
 # for dbus
 Requires:	dbus-common dbus-tools
 
+Provides:	user(%scuser)
+Provides:	group(%scuser)
+
 
 %description
 signal-cli provides an unofficial commandline, dbus and JSON-RPC interface for the Signal messenger.
@@ -294,6 +297,7 @@ systemctl condrestart %{pname}.service
 * Sat Nov 15 2025 Peter Bieringer <pb@bieringer.de> - 0.13.22-1
 - New upstream version 0.13.22
 - EL8: update libsignal_jni.so to 0.86.1
+- Add provides for created user+group
 
 * Sun Nov 02 2025 Peter Bieringer <pb@bieringer.de> - 0.13.21-1
 - New upstream version 0.13.21
