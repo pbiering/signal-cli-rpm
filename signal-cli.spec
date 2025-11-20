@@ -26,7 +26,7 @@
 # required major JAVA version
 %global version_java_major	21
 
-%global release_token 1
+%global release_token 2
 
 
 %global basedir         /usr/lib/%{pname}
@@ -46,7 +46,7 @@ Summary:	signal-cli commandline, dbus and JSON-RPC interface for the Signal mess
 Version:	%{version_signal_cli}
 Release:	%{release_token}%{?dist}
 
-License:	GPLv3
+License:	GPL-3.0-or-later
 URL:		https://github.com/AsamK/signal-cli
 
 Source0:	https://github.com/AsamK/signal-cli/releases/download/v%{version}/signal-cli-%{version}.tar.gz
@@ -294,6 +294,9 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Thu Nov 20 2025 Peter Bieringer <pb@bieringer.de> - 0.13.22-2
+- Adjust license according to SPDX
+
 * Sat Nov 15 2025 Peter Bieringer <pb@bieringer.de> - 0.13.22-1
 - New upstream version 0.13.22
 - EL8: update libsignal_jni.so to 0.86.1
