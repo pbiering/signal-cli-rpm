@@ -93,7 +93,8 @@ Provides:	group(%scuser)
 %description
 signal-cli provides an unofficial command line, D-BUS and JSON-RPC interface
  for the Signal messenger.
-user/group	: %{scuser}/%{scgroup}
+user		: %{scuser}
+group		: %{scgroup}
 home directory	: %{vardir}
 binary for native interface: %{_bindir}/signal-cli
 binary for D-BUS  interface: %{_bindir}/signal-cli-dbus
