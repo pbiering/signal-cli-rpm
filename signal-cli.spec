@@ -42,7 +42,7 @@
 %global	scgroup		signal-cli
 
 Name:		%{pname}
-Summary:	signal-cli command line, DBUS and JSON-RPC interface for the Signal messenger
+Summary:	signal-cli command line, D-BUS and JSON-RPC interface for the Signal messenger
 Version:	%{version_signal_cli}
 Release:	%{release_token}%{?dist}
 
@@ -91,11 +91,12 @@ Provides:	group(%scuser)
 
 
 %description
-signal-cli provides an unofficial command line, DBUS and JSON-RPC interface for the Signal messenger.
+signal-cli provides an unofficial command line, D-BUS and JSON-RPC interface
+ for the Signal messenger.
 user/group	: %{scuser}/%{scgroup}
 home directory	: %{vardir}
 binary for native interface: %{_bindir}/signal-cli
-binary for DBUS	  interface: %{_bindir}/signal-cli-dbus
+binary for D-BUS  interface: %{_bindir}/signal-cli-dbus
 
 
 
@@ -218,7 +219,7 @@ if getent passwd %{scuser} >/dev/null; then
 	fi
 else
 	echo "system user  for %{pname} needs to be created: %{scuser}"
-	useradd -r -g %{scgroup} -d %{vardir} -s /bin/bash -c "signal-cli command line, DBUS and JSON-RPC interface for the Signal messenger" %{scuser} >/dev/null
+	useradd -r -g %{scgroup} -d %{vardir} -s /bin/bash -c "signal-cli command line, D-BUS and JSON-RPC interface for the Signal messenger" %{scuser} >/dev/null
 fi
 
 
