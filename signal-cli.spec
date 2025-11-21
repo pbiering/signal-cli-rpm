@@ -277,11 +277,11 @@ systemctl condrestart %{pname}.service
 %{_prefix}/share/dbus-1/system.d/org.asamk.Signal.conf
 %{_prefix}/share/dbus-1/system-services/org.asamk.Signal.service
 
-%dir %attr(770,%{scuser},%{scgroup}) %{vardir}
-%dir %attr(770,%{scuser},%{scgroup}) %{vardir}/.local
-%dir %attr(770,%{scuser},%{scgroup}) %{vardir}/.local/share
-%dir %attr(770,%{scuser},%{scgroup}) %{vardir}/.local/share/%{pname}
-%dir %attr(770,%{scuser},%{scgroup}) %{vardir}/.local/share/%{pname}/*
+%dir %attr(750,%{scuser},%{scgroup}) %{vardir}
+%dir %attr(750,%{scuser},%{scgroup}) %{vardir}/.local
+%dir %attr(750,%{scuser},%{scgroup}) %{vardir}/.local/share
+%dir %attr(750,%{scuser},%{scgroup}) %{vardir}/.local/share/%{pname}
+%dir %attr(750,%{scuser},%{scgroup}) %{vardir}/.local/share/%{pname}/*
 
 %attr(-,%{scuser},%{scgroup}) %{vardir}/*
 
@@ -296,6 +296,7 @@ systemctl condrestart %{pname}.service
 %changelog
 * Fri Nov 21 2025 Peter Bieringer <pb@bieringer.de>
 - Several fixes for rpmlint
+- Change directory permissions from 770 to 750
 
 * Thu Nov 20 2025 Peter Bieringer <pb@bieringer.de> - 0.13.22-2
 - Adjust license according to SPDX
