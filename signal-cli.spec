@@ -26,7 +26,7 @@
 # required major JAVA version
 %global version_java_major	21
 
-%global release_token 2
+%global release_token 3
 
 
 %global basedir		/usr/lib/%{pname}
@@ -295,7 +295,7 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
-* Fri Nov 21 2025 Peter Bieringer <pb@bieringer.de>
+* Fri Nov 21 2025 Peter Bieringer <pb@bieringer.de> - 0.13.22-3
 - Several fixes for rpmlint
 - Change directory permissions from 770 to 750
 
