@@ -228,7 +228,7 @@ fi
 for file in /etc/dbus-1/system.d/org.asamk.Signal.conf /etc/systemd/system/signal-cli.service; do
 	if [ -e $file ]; then
 		echo "file found from manual installation, renamed: $file -> $file.rpmunknown"
-		mv $file $file.rpmunknown
+		%{__mv} $file $file.rpmunknown
 	fi
 done
 
