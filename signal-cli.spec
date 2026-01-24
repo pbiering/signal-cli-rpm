@@ -18,10 +18,10 @@
 
 
 ## MAIN VERSIONS+RELEASE
-%global version_signal_cli	0.13.22
+%global version_signal_cli	0.13.23
 
 # EL8: since 0.12.0 bundled libsignal_jni.so requires GLIBC_2.33 while has only 2.28 -> build from https://github.com/exquo/signal-libs-build/ is required
-%global version_libsignal	0.86.1
+%global version_libsignal	0.86.12
 
 # required major JAVA version
 %global version_java_major	21
@@ -295,6 +295,10 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Sat Jan 24 2026 Peter Bieringer <pb@bieringer.de> - 0.13.23-1
+- New upstream version 0.13.23
+- EL8: update libsignal_jni.so to 0.86.12
+
 * Fri Nov 21 2025 Peter Bieringer <pb@bieringer.de> - 0.13.22-3
 - Several fixes for rpmlint
 - Change directory permissions from 770 to 750
