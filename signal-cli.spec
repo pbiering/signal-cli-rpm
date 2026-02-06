@@ -24,7 +24,11 @@
 %global version_libsignal	0.87.0
 
 # required major JAVA version
+%if (0%{?fedora} >= 44)
+%global version_java_major	25
+%else
 %global version_java_major	21
+%endif
 
 %global release_token 3
 
@@ -298,6 +302,7 @@ systemctl condrestart %{pname}.service
 * Fri Feb 06 2026 Peter Bieringer <pb@bieringer.de> - 0.13.24-1
 - New upstream version 0.13.24
 - EL8: update libsignal_jni.so to 0.87.0
+- Fedora >= 44: select Java 25
 
 * Sat Jan 24 2026 Peter Bieringer <pb@bieringer.de> - 0.13.23-1
 - New upstream version 0.13.23
