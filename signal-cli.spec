@@ -24,7 +24,7 @@
 %global version_libsignal	0.87.4
 
 # required major JAVA version
-%if (0%{?fedora} >= 42) || (0{?rhel} >= 9)
+%if (0%{?fedora} >= 42) || (0%{?rhel} >= 9)
 %global version_java_major	25
 %else
 %global version_java_major	21
