@@ -80,7 +80,7 @@ Source301:	signal-cli-dbus
 BuildRequires:	systemd
 Requires(pre):	shadow-utils
 %if 0%{?version_java_major_latest}
-Requires:	java-latest-openjdk-headless == %{version_java_major}
+Requires:	java-latest-openjdk-headless >= %{version_java_major}
 %else
 Requires:	java-%{version_java_major}-openjdk-headless
 %endif
@@ -91,7 +91,7 @@ BuildRequires:	rpmdevtools
 
 # for testing the build
 %if 0%{?version_java_major_latest}
-BuildRequires:	java-latest-openjdk-headless == %{version_java_major}
+BuildRequires:	java-latest-openjdk-headless >= %{version_java_major}
 %else
 BuildRequires:	java-%{version_java_major}-openjdk-headless
 %endif
