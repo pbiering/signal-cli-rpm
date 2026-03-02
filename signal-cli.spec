@@ -27,7 +27,8 @@
 %if (0%{?fedora} >= 42) || (0%{?rhel} >= 9)
 %global version_java_major	25
 %else
-%global version_java_major	21
+%global version_java_major	26
+%global version_java_major_latest	1
 %endif
 
 %global release_token 1
@@ -78,14 +79,22 @@ Source301:	signal-cli-dbus
 %{?systemd_requires}
 BuildRequires:	systemd
 Requires(pre):	shadow-utils
+%if 0%{?version_java_major_latest}
+Requires:	java-latest-openjdk-headless == %{version_java_major}
+%else
 Requires:	java-%{version_java_major}-openjdk-headless
+%endif
 
 # for downloading sources
 BuildRequires:	curl
 BuildRequires:	rpmdevtools
 
 # for testing the build
+%if 0%{?version_java_major_latest}
+Requires:	java-latest-openjdk-headless == %{version_java_major}
+%else
 BuildRequires:	java-%{version_java_major}-openjdk-headless
+%endif
 
 # for dbus
 Requires:	dbus-common dbus-tools
@@ -302,6 +311,7 @@ systemctl condrestart %{pname}.service
 * Fri Feb 06 2026 Peter Bieringer <pb@bieringer.de> - 0.14.0-1
 - New upstream version 0.14.0
 - EL8: update libsignal_jni.so to 0.87.4
+- EL8: select Java 26 from EPEL by java-latest
 - Fedora >= 42 and EL >=9: select Java 25
 
 * Fri Feb 06 2026 Peter Bieringer <pb@bieringer.de> - 0.13.24-1
