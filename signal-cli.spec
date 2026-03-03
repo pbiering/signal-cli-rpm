@@ -31,10 +31,14 @@
 %global version_java_major_latest	1
 %endif
 
-%global release_token 1
+%if 0%{?version_java_major_latest}
+%define version_java_major_latest_next %(echo $[ %{version_java_major} + 1])
+%endif
+
+%global release_token 2
 
 
-%global basedir		/usr/lib/%{pname}
+%global basedir		%{_libdir}/%{pname}
 %global bindir		%{basedir}/bin
 %global vardir		%{_localstatedir}/lib/%{pname}
 
@@ -81,6 +85,7 @@ BuildRequires:	systemd
 Requires(pre):	shadow-utils
 %if 0%{?version_java_major_latest}
 Requires:	java-latest-openjdk-headless >= %{version_java_major}
+Requires:	java-latest-openjdk-headless < %{version_java_major_latest_next}
 %else
 Requires:	java-%{version_java_major}-openjdk-headless
 %endif
@@ -91,7 +96,8 @@ BuildRequires:	rpmdevtools
 
 # for testing the build
 %if 0%{?version_java_major_latest}
-BuildRequires:	java-latest-openjdk-headless >= %{version_java_major}
+Requires:	java-latest-openjdk-headless >= %{version_java_major}
+Requires:	java-latest-openjdk-headless < %{version_java_major_latest_next}
 %else
 BuildRequires:	java-%{version_java_major}-openjdk-headless
 %endif
@@ -198,11 +204,6 @@ for d in data avatars; do
 	%{__ln_s} .local/share/%{pname}/$d %{buildroot}%{vardir}/$d
 done
 
-
-## SELinux
-# (currently no policy)
-
-
 # replace placeholders
 find %{buildroot}%{_unitdir} %{buildroot}%{_bindir} -type f | while read file; do
 	# replace directories
@@ -246,15 +247,7 @@ for file in /etc/dbus-1/system.d/org.asamk.Signal.conf /etc/systemd/system/signa
 done
 
 
-# SELinux
-# (currently no policy)
-
-
-
 %post
-# SELinux
-# (currently no policy)
-
 ## systemd/service
 %systemd_post %{pname}.service
 
@@ -264,10 +257,6 @@ done
 ## systemd/service
 %systemd_preun %{pname}.service
 
-# SELinux
-# (currently no policy)
-
-
 
 %postun
 ## systemd/service
@@ -275,9 +264,6 @@ done
 
 
 %posttrans
-# SELinux
-# (currently no policy)
-
 systemctl daemon-reload
 systemctl condrestart %{pname}.service
 
@@ -308,7 +294,11 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
-* Fri Feb 06 2026 Peter Bieringer <pb@bieringer.de> - 0.14.0-1
+* Tue Mar 03 2026 Peter Bieringer <pb@bieringer.de> - 0.14.0-2
+- Spec: fixes according to BZ#2373115
+- Spec: improve major version pinning for java-latest
+
+* Mon Mar 02 2026 Peter Bieringer <pb@bieringer.de> - 0.14.0-1
 - New upstream version 0.14.0
 - EL8: update libsignal_jni.so to 0.87.4
 - EL8: select Java 26 from EPEL by java-latest
