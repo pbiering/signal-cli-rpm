@@ -18,7 +18,7 @@
 
 
 ## MAIN VERSIONS+RELEASE
-%global version_signal_cli	0.14.0
+%global version_signal_cli	0.14.1
 
 # EL8: since 0.12.0 bundled libsignal_jni.so requires GLIBC_2.33 while has only 2.28 -> build from https://github.com/exquo/signal-libs-build/ is required
 %global version_libsignal	0.87.4
@@ -35,7 +35,7 @@
 %define version_java_major_latest_next %(echo $[ %{version_java_major} + 1])
 %endif
 
-%global release_token 2
+%global release_token 1
 
 
 %global basedir		%{_libdir}/%{pname}
@@ -54,6 +54,8 @@ Name:		%{pname}
 Summary:	signal-cli command line, D-BUS and JSON-RPC interface for the Signal messenger
 Version:	%{version_signal_cli}
 Release:	%{release_token}%{?dist}
+
+ExcludeArch:	i386 sparc s390 s390x ia64 alpha
 
 License:	GPL-3.0-or-later
 URL:		https://github.com/AsamK/signal-cli
@@ -294,6 +296,10 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Mon Mar 09 2026 Peter Bieringer <pb@bieringer.de> - 0.14.1-1
+- New upstream version 0.14.1
+- Add ExcludeArch for i386 sparc s390 s390x ia64 alpha
+
 * Tue Mar 03 2026 Peter Bieringer <pb@bieringer.de> - 0.14.0-2
 - Spec: fixes according to BZ#2373115
 - Spec: improve major version pinning for java-latest
