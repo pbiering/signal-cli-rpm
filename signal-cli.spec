@@ -87,7 +87,7 @@ BuildRequires:	systemd
 Requires(pre):	shadow-utils
 %if 0%{?version_java_major_latest}
 Requires:	java-latest-openjdk-headless >= %{version_java_major}
-Requires:	java-latest-openjdk-headless < %{version_java_major_latest_next}
+Conflicts:	java-latest-openjdk-headless >= %{version_java_major_latest_next}
 %else
 Requires:	java-%{version_java_major}-openjdk-headless
 %endif
@@ -99,7 +99,7 @@ BuildRequires:	rpmdevtools
 # for testing the build
 %if 0%{?version_java_major_latest}
 BuildRequires:	java-latest-openjdk-headless >= %{version_java_major}
-BuildRequires:	java-latest-openjdk-headless < %{version_java_major_latest_next}
+BuildConflicts:	java-latest-openjdk-headless >= %{version_java_major_latest_next}
 %else
 BuildRequires:	java-%{version_java_major}-openjdk-headless
 %endif
