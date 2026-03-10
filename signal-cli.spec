@@ -98,8 +98,8 @@ BuildRequires:	rpmdevtools
 
 # for testing the build
 %if 0%{?version_java_major_latest}
-Requires:	java-latest-openjdk-headless >= %{version_java_major}
-Requires:	java-latest-openjdk-headless < %{version_java_major_latest_next}
+BuildRequires:	java-latest-openjdk-headless >= %{version_java_major}
+BuildRequires:	java-latest-openjdk-headless < %{version_java_major_latest_next}
 %else
 BuildRequires:	java-%{version_java_major}-openjdk-headless
 %endif
