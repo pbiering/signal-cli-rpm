@@ -154,7 +154,7 @@ install -d -p %{buildroot}%{basedir}
 
 # replace libsignal_jni.so
 %if 0%{?rhel} == 8
-gunzip -c %{SOURCE1} >%{buildroot}%{basedir}/libsignal_jni.so
+gunzip -c %{SOURCE1} >%{buildroot}%{basedir}/libsignal_jni_amd64.so
 # check compatibility
 if ldd %{buildroot}%{basedir}/libsignal_jni.so | grep "not found"; then
 	echo "ERROR : libsignal_jni.so is not compatible"
@@ -170,10 +170,10 @@ if [ ! -f %{buildroot}%{basedir}/lib/libsignal-client-%{version_libsignal}.jar ]
 	exit 1
 fi
 # implant libsignal
-echo "INFO  : implant libsignal_jni.so (libsignal_jni.so-v%{version_libsignal}-x86_64-unknown-linux-gnu.tar.gz) into libsignal-client-%{version_libsignal}.jar"
-zip -j %{buildroot}%{basedir}/lib/libsignal-client-%{version_libsignal}.jar %{buildroot}%{basedir}/libsignal_jni.so
+echo "INFO  : implant libsignal_jni_amd64.so from %{SOURCE1} into libsignal-client-%{version_libsignal}.jar"
+zip -j %{buildroot}%{basedir}/lib/libsignal-client-%{version_libsignal}.jar %{buildroot}%{basedir}/libsignal_jni_amd64.so
 # remove
-%{__rm} %{buildroot}%{basedir}/libsignal_jni.so
+%{__rm} %{buildroot}%{basedir}/libsignal_jni_amd64.so
 %endif
 
 ### wrapper scripts
@@ -297,7 +297,8 @@ systemctl condrestart %{pname}.service
 
 %changelog
 * Wed Mar 25 2026 Peter Bieringer <pb@bieringer.de>
-- Spec: specify arch for java-latest
+- Spec: specify epoch for java-latest
+- Spec: fix implanting of libsignal_jni_amd64.so on EL8
 
 * Mon Mar 09 2026 Peter Bieringer <pb@bieringer.de> - 0.14.1-1
 - New upstream version 0.14.1
