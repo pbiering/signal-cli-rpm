@@ -35,7 +35,7 @@
 %define version_java_major_latest_next %(echo $[ %{version_java_major} + 1])
 %endif
 
-%global release_token 1
+%global release_token 2
 
 
 %global basedir		%{_libdir}/%{pname}
@@ -296,7 +296,7 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
-* Wed Mar 25 2026 Peter Bieringer <pb@bieringer.de>
+* Wed Mar 25 2026 Peter Bieringer <pb@bieringer.de> - 0.14.1-2
 - Spec: specify epoch for java-latest
 - Spec: fix implanting of libsignal_jni_amd64.so on EL8
 
