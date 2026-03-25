@@ -86,8 +86,8 @@ Source301:	signal-cli-dbus
 BuildRequires:	systemd
 Requires(pre):	shadow-utils
 %if 0%{?version_java_major_latest}
-Requires:	java-latest-openjdk-headless >= %{version_java_major}
-Conflicts:	java-latest-openjdk-headless >= %{version_java_major_latest_next}
+Requires:	java-latest-openjdk-headless >= 1:%{version_java_major}
+Conflicts:	java-latest-openjdk-headless >= 1:%{version_java_major_latest_next}
 %else
 Requires:	java-%{version_java_major}-openjdk-headless
 %endif
@@ -98,8 +98,8 @@ BuildRequires:	rpmdevtools
 
 # for testing the build
 %if 0%{?version_java_major_latest}
-BuildRequires:	java-latest-openjdk-headless >= %{version_java_major}
-BuildConflicts:	java-latest-openjdk-headless >= %{version_java_major_latest_next}
+BuildRequires:	java-latest-openjdk-headless >= 1:%{version_java_major}
+BuildConflicts:	java-latest-openjdk-headless >= 1:%{version_java_major_latest_next}
 %else
 BuildRequires:	java-%{version_java_major}-openjdk-headless
 %endif
@@ -296,6 +296,9 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Wed Mar 25 2026 Peter Bieringer <pb@bieringer.de>
+- Spec: specify arch for java-latest
+
 * Mon Mar 09 2026 Peter Bieringer <pb@bieringer.de> - 0.14.1-1
 - New upstream version 0.14.1
 - Add ExcludeArch for i386 sparc s390 s390x ia64 alpha
