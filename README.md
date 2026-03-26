@@ -13,6 +13,11 @@ Until included by Fedora and EPEL available via copr:
 ### confilg files
 - required ones taken+adjusted from https://github.com/AsamK/signal-cli/tree/master/data
 
+### client usage
+
+since 0.14.1-3 `signal-cli` wrapper script can be used by other than designated user `signal-cli` by setting
+`SIGNAL_USER_OVERRIDE=1` in environment before executing the script
+
 ## Usage
 
 ### Build RPM
@@ -90,6 +95,6 @@ Until included by Fedora and EPEL available via copr:
 
 - https://copr.fedorainfracloud.org/coprs/pbiering/InternetServerExtensions/
 
-### configuration
+### Configuration
 
 See https://github.com/AsamK/signal-cli/wiki
