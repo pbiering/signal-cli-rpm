@@ -21,7 +21,7 @@
 %global version_signal_cli	0.14.2
 
 # EL8: since 0.12.0 bundled libsignal_jni.so requires GLIBC_2.33 while has only 2.28 -> build from https://github.com/exquo/signal-libs-build/ is required
-%global version_libsignal	0.87.4
+%global version_libsignal	0.90.0
 
 # required major JAVA version
 %if (0%{?fedora} >= 42) || (0%{?rhel} >= 9)
@@ -156,7 +156,7 @@ install -d -p %{buildroot}%{basedir}
 %if 0%{?rhel} == 8
 gunzip -c %{SOURCE1} >%{buildroot}%{basedir}/libsignal_jni_amd64.so
 # check compatibility
-if ldd %{buildroot}%{basedir}/libsignal_jni.so | grep "not found"; then
+if ldd %{buildroot}%{basedir}/libsignal_jni.so | grep -q "not found"; then
 	echo "ERROR : libsignal_jni.so is not compatible"
 	exit 1
 fi
@@ -298,6 +298,7 @@ systemctl condrestart %{pname}.service
 %changelog
 * Sat Apr 04 2026 Peter Bieringer <pb@bieringer.de> - 0.14.2-1
 - New upstream version 0.14.2
+- EL8: update libsignal_jni.so to 0.90.0
 
 * Wed Mar 25 2026 Frank Wall <fw@moov.de> - 0.14.1-3
 - Wrapper script: allow to override the user check
