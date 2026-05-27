@@ -22,7 +22,7 @@
 
 # EL8: since 0.12.0 bundled libsignal_jni.so requires GLIBC_2.33 while has only 2.28 -> build from https://github.com/exquo/signal-libs-build/ is required
 # See also https://github.com/AsamK/signal-cli/blob/master/libsignal-version
-%global version_libsignal	0.92.1
+%global version_libsignal	0.94.1
 
 # required major JAVA version
 %if (0%{?fedora} >= 42) || (0%{?rhel} >= 9)
@@ -66,7 +66,7 @@ Source0:	https://github.com/AsamK/signal-cli/releases/download/v%{version}/signa
 # only used on EL8 since 0.12.0
 #Source1:	https://github.com/exquo/signal-libs-build/releases/download/libsignal_v#{version_libsignal}/libsignal_jni.so-v#{version_libsignal}-x86_64-unknown-linux-gnu.tar.gz
 # only used on EL8 since 0.52.1
-Source1:	https://media.projektzentrisch.de/temp/signal-cli/tests/libsignal_jni_so%(echo "%{version_libsignal}" | awk -F. '{ printf "%01d%02d%01d", $1, $2, $3 }')_ubuntu1804_amd64.gz
+Source1:	https://media.projektzentrisch.de/temp/signal-cli/libsignal_jni_so%(echo "%{version_libsignal}" | awk -F. '{ printf "%01d%02d%01d", $1, $2, $3 }')_ubuntu2004_amd64.gz
 
 
 ## config files taken+adjusted from https://github.com/AsamK/signal-cli/tree/master/data
@@ -299,6 +299,7 @@ systemctl condrestart %{pname}.service
 %changelog
 * Wed May 27 2026 Peter Bieringer <pb@bieringer.de> - 0.14.4.1-1
 - New upstream version 0.14.4.1
+- EL8: update libsignal_jni.so to 0.94.1
 
 * Thu Apr 23 2026 Peter Bieringer <pb@bieringer.de> - 0.14.3-1
 - New upstream version 0.14.3
