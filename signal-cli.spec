@@ -299,6 +299,7 @@ systemctl condrestart %{pname}.service
 %changelog
 * Thu Jun 11 2026 Peter Bieringer <pb@bieringer.de> - 0.14.5-1
 - New upstream version 0.14.5
+- EL8: update libsignal_jni.so to 0.94.4
 
 * Wed May 27 2026 Peter Bieringer <pb@bieringer.de> - 0.14.4.1-1
 - New upstream version 0.14.4.1
