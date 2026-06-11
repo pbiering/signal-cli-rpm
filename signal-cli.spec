@@ -22,7 +22,7 @@
 
 # EL8: since 0.12.0 bundled libsignal_jni.so requires GLIBC_2.33 while has only 2.28 -> build from https://github.com/exquo/signal-libs-build/ is required
 # See also https://github.com/AsamK/signal-cli/blob/master/libsignal-version
-%global version_libsignal	0.94.1
+%global version_libsignal	0.94.4
 
 # required major JAVA version
 %if (0%{?fedora} >= 42) || (0%{?rhel} >= 9)
@@ -94,7 +94,6 @@ Requires:	java-%{version_java_major}-openjdk-headless
 %endif
 
 # for downloading sources
-BuildRequires:	curl
 BuildRequires:	rpmdevtools
 
 # for testing the build

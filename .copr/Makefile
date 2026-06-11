@@ -1,28 +1,8 @@
 rpmdev-spectool:
 	if rpm -q rpmdevtools; then echo "RPM rpmdevtools is already installed"; else echo "RPM rpmdevtools need to be installed first"; dnf install -y rpmdevtools; fi
 
-curl:
-	if rpm -q curl; then echo "RPM curl is already installed"; else echo "RPM curl need to be installed first"; dnf install -y curl; fi
-
-download: rpmdev-spectool curl
-	rpmdev-spectool $(spec) | awk '$$1 ~ /^Source/ && $$2 ~ /^http/ { print $$2 }' | while read url; do \
-		file=$$(basename $$url); \
-		echo "INFO  : download source: $$url -> $$file"; \
-		http_code=$$(curl -w "%{http_code}" -L -s -o $$file $$url); \
-		echo "INFO  : http_code=$$http_code"; \
-		r=$$?; \
-		if [ $$r -eq 0 -a "$$http_code" = "200" ]; then \
-			if [ -s $$file ]; then \
-				echo "INFO  : download source: $$url (SUCCESS)"; \
-			else \
-				echo "ERROR : file empty $$file"; \
-				exit 1; \
-			fi; \
-		else \
-			echo "ERROR : download source: $$url (ERROR)"; \
-			exit 1; \
-		fi; \
-		done
+download: rpmdev-spectool
+	rpmdev-spectool $(spec) -g
 
 srpm:	download
 	if [ -n "$(outdir)" ]; then \
