@@ -123,9 +123,9 @@ binary for D-BUS  interface: %{_bindir}/signal-cli-dbus
 
 
 %prep
-%{__rm} -rf %{builddir}
+%if 0%{?rhel} >= 8 && 0%{?rhel} <= 10
 %{__mkdir} %{builddir}
-cd %{builddir}
+%endif
 
 # nothing to build -> nothing to extract
 
