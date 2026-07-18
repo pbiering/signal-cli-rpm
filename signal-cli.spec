@@ -66,7 +66,7 @@ Source0:	https://github.com/AsamK/signal-cli/releases/download/v%{version}/signa
 # only used on EL8 since 0.12.0
 #Source1:	https://github.com/exquo/signal-libs-build/releases/download/libsignal_v#{version_libsignal}/libsignal_jni.so-v#{version_libsignal}-x86_64-unknown-linux-gnu.tar.gz
 # only used on EL8 since 0.52.1
-Source1:	https://media.projektzentrisch.de/temp/signal-cli/libsignal_jni_so%(echo "%{version_libsignal}" | awk -F. '{ printf "%01d%02d%01d", $1, $2, $3 }')_ubuntu2004_amd64.gz
+Source1:	https://media.projektzentrisch.de/temp/signal-cli/tests/libsignal_jni_so%(echo "%{version_libsignal}" | awk -F. '{ printf "%01d%02d%01d", $1, $2, $3 }')_ubuntu1804_amd64.gz
 
 
 ## config files taken+adjusted from https://github.com/AsamK/signal-cli/tree/master/data
