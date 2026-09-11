@@ -28,7 +28,7 @@
 %if (0%{?fedora} >= 42) || (0%{?rhel} >= 9)
 %global version_java_major	25
 %else
-%global version_java_major	26
+%global version_java_major	27
 %global version_java_major_latest	1
 %endif
 
@@ -299,6 +299,7 @@ systemctl condrestart %{pname}.service
 * Fri Sep 11 2026 Peter Bieringer <pb@bieringer.de> - 0.14.8-1
 - New upstream version 0.14.8
 - EL8: update libsignal_jni.so to 0.102.1
+- EL8: select Java 27 from EPEL by java-latest
 
 * Sun Aug 02 2026 Peter Bieringer <pb@bieringer.de> - 0.14.7-1
 - New upstream version 0.14.7
