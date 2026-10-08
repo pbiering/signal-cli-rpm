@@ -18,11 +18,11 @@
 
 
 ## MAIN VERSIONS+RELEASE
-%global version_signal_cli	0.14.8
+%global version_signal_cli	0.14.9
 
 # EL8: since 0.12.0 bundled libsignal_jni.so requires GLIBC_2.33 while has only 2.28 -> build from https://media.projektzentrisch.de/temp/signal-cli/tests/ is required
 # See also https://github.com/AsamK/signal-cli/blob/master/libsignal-version
-%global version_libsignal	0.102.1
+%global version_libsignal	0.103.0
 
 # required major JAVA version
 %if (0%{?fedora} >= 42) || (0%{?rhel} >= 9)
@@ -296,6 +296,10 @@ systemctl condrestart %{pname}.service
 
 
 %changelog
+* Thu Oct 08 2026 Peter Bieringer <pb@bieringer.de> - 0.14.9-1
+- New upstream version 0.14.9
+- EL8: update libsignal_jni.so to 0.103.0
+
 * Fri Sep 11 2026 Peter Bieringer <pb@bieringer.de> - 0.14.8-1
 - New upstream version 0.14.8
 - EL8: update libsignal_jni.so to 0.102.1
